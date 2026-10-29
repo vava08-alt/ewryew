@@ -1,0 +1,1445 @@
+# ================= AnarchyCore 2.0 =================
+config-version: 15               # не менять: по ней плагин дописывает новые настройки при обновлении
+server-name: "AquaAnarchy"
+prefix: "<gradient:#00f0ff:#0080ff><bold>AquaAnarchy</bold></gradient> <dark_gray>»</dark_gray> "
+currency: "⛃"
+ari-name: "Ari"
+ari-symbol: "✦"
+donate-site: "site.ru/donate"
+
+auth:
+  timeout-seconds: 60
+  session-minutes: 10
+  max-attempts: 3
+  min-password: 5
+
+combat:
+  # Кулдауны предметов в режиме боя (сек): пока таймер не истёк, предмет нельзя съесть/выпить/бросить
+  item-cooldowns:
+    enchanted_golden_apple: 90     # чарка
+    golden_apple: 20               # гэпл
+    regeneration: 20               # любые зелья регенерации
+    healing: 20                    # зелья исцеления I и II (обычные, взрывные, туманные)
+  item-cooldowns-only-in-combat: true   # false - кулдауны действуют всегда
+  tag-seconds: 15
+  kill-on-logout: true
+  blocked-commands: [ext, nv, stonecutter, grindstone, smithing, loom, cartography, ecsee, tpa, tpahere, tpaccept, home, h, rtp, wild, back, ghost, ec, enderchest, craft, heal, feed, repair, fix, suicide, kill, kit, spawn, fly, top, anvil, invsee, menu, m]
+
+economy:
+  start-balance: 100
+  playtime-reward: 5
+  playtime-interval: 10
+  kill-reward: 15
+  steal-percent: 10
+  daily-reward: 100          # /daily, умножается: игрок x1, каждый следующий ранг +0.5
+  ari-to-coins: 1000         # 1 Ari = 1000 монет в обменнике
+  # Монеты за убийство мобов (дробное - шансом: 0.5 = 1 монета в половине случаев)
+  mob-rewards:
+    enabled: true
+    monster: 2                 # любой враждебный моб
+    animal: 1                  # животные и водные мобы
+    spawner-multiplier: 0.25   # мобы со спавнеров (фермы) дают в 4 раза меньше
+    actionbar: true
+    mobs:                      # особые мобы
+      CREEPER: 3
+      ENDERMAN: 4
+      WITCH: 4
+      BLAZE: 4
+      WITHER_SKELETON: 5
+      PIGLIN_BRUTE: 8
+      EVOKER: 10
+      RAVAGER: 15
+      ELDER_GUARDIAN: 100
+      WARDEN: 250
+      WITHER: 500
+      ENDER_DRAGON: 1000
+      ZOMBIFIED_PIGLIN: 1
+      SLIME: 1
+      MAGMA_CUBE: 1
+
+streaks:
+  glow-from: 5
+  announce: [3, 5, 10, 15, 20, 30, 50, 100]
+  bonus-per-kill: 5
+
+heads:
+  drop-on-pvp: true
+
+teleport:
+  tpa-timeout: 60
+
+spawn:
+  world: spawn               # отдельный мир-хаб со спавном (без урона, мобов, PvP и строительства)
+  location: "spawn;332.5;6.0;350.5;180.0;0.0"
+  time: 6000                 # время суток на спавне (не меняется)
+  builders: [lDcc]          # кто может строить/ломать на спавне (core spawnbuilder add|remove <ник>)
+  void-y: -70                # упал ниже - телепорт обратно
+  return-delay-ticks: 50     # после входа игрок возвращается туда, где вышел (через 2.5 сек)
+  # точку можно поменять командой /core setspawn
+
+rtp:
+  world: world
+  normal: {min: 300, max: 3000}        # /rtp - для всех
+  far: {min: 5000, max: 30000}         # /rtp far - с Hunter
+  player: {min: 25, max: 70}           # /rtp player - к случайному игроку, с Lord
+
+hunt:
+  range: 5000
+
+chat:
+  cooldown-ms: 2000
+
+announcements:
+  interval-minutes: 5
+  messages:
+  - "<gray>Главное меню: <yellow>/menu</yellow>. Профиль: <yellow>/profile"
+  - "<gray>Эксклюзивные предметы: <light_purple>/shop</light_purple>, привилегии: <gold>/don"
+  - "<gray>Защити базу - купи приват: <yellow>/market</yellow> (монеты) или <light_purple>/shop</light_purple> (донат)"
+  - "<gray>Кейсы стоят на спавне: <aqua>донат-кейс, Ari-кейс и кейс титулов</aqua>. <yellow>/cases"
+  - "<gray>Ключ от Ari-кейса каждый день в <gold>/daily</gold>, от кейса титулов - за все квесты дня"
+  - "<gray>Ежедневные квесты: <aqua>/quests</aqua>, награда за вход: <gold>/daily"
+  - "<gray>Серия из <red>5</red> убийств подсвечивает тебя для всего сервера. Беги."
+  - "<gray>Создай клан с друзьями: <aqua>/clan create <тег> <название></aqua> - общий приват, банк и войны"
+  - "<gray>Продавай и покупай у игроков: <gold>/ah</gold> - аукцион"
+  - "<gray>Скупщик: <gold>/seller-buyer</gold> - ресурсы за монеты, ТОП-5 предметов в 2-3 раза дороже"
+  - '<gray>Автошахта на спавне обновляется каждые 7 минут: <gold>/warp mine'
+  - "<gray>Кланы качают уровень: больше мест, общий сундук и бафы. Захватывай территории: <aqua>/clan zones</aqua>"
+  - "<gray>Сферы и талисманы дают буст во второй руке - <light_purple>/shop</light_purple>"
+  - "<gray>Боевой пропуск на 50 уровней: <yellow>/pass</yellow> - награды за квесты и онлайн"
+  - "<gray>Когда следующий ивент и где он идёт: <yellow>/event delay"
+  - "<gray>Варпы игроков - магазины и фермы: <green>/pwarps</green>, свой варп: <green>/pwarp set"
+  - "<gray>Буст x2 монет для <bold>всего</bold> сервера: <light_purple>/boost"
+  - "<gray>Видишь читера? Напиши <red>/spec <ник></red> - модератор проследит за ним"
+  - "<gray>Есть промокод от ютубера? Вводи <gold>/code <код>"
+
+rules:
+- "<gold><bold>Правила анархии</bold>"
+- "<gray>1. <white>Можно всё: гриф вне приватов, PvP, ловушки, обман, рейды."
+- "<gray>2. <white>Читы ловит ИИ-античит AquaGuard + Grim. Вызвали на проверку - не выходи."
+- "<gray>3. <white>Лаг-машины и краш-эксплойты сервера - бан."
+- "<gray>4. <white>Администрация не возвращает вещи."
+
+scoreboard:
+  # Скорборд в стиле "INFO / ECONOMY". Плейсхолдеры: {name} {rank_badge} {clan} {ping} {kills} {deaths}
+  #   {coins} {coins_short} {ari} {ari_short} {keys} {quests} {online} {server} {title} {streak} {playtime} {event}
+  # Значок ранга: ranks.<id>.symbol. Красные цифры справа скрыты.
+  title: "<gradient:#00f0ff:#0080ff><bold>ᴀǫᴜᴀᴀɴᴀʀᴄʜʏ</bold></gradient>"
+  no-clan: "Нет"
+  lines:
+  - " "
+  - "<#00d9ff>↱ <bold>ɪɴꜰᴏ:</bold>"
+  - "<#00d9ff>┃ <white>Ник: <#5ce1ff>{name}"
+  - "<#00d9ff>┃ <white>Ранг: {rank_badge}"
+  - "<#00d9ff>┃ <white>Клан: <#5ce1ff>{clan}"
+  - "<#00d9ff>┃ <white>Пинг: <#5ce1ff>{ping}мс"
+  - "<#00d9ff>┃ <white>У/С: <#5ce1ff>{kills} / {deaths}"
+  - "  "
+  - "<#00d9ff>↱ <bold>ᴇᴄᴏɴᴏᴍʏ:</bold>"
+  - "<#00d9ff>┃ <white>Баланс: <#5ce1ff>{coins_short} <gold>⛃"
+  - "<#00d9ff>┃ <white>Ari: <#5ce1ff>{ari_short} <light_purple>✦"
+  - "   "
+  - "<gray>━━<white>◆<gray>━[ <#5ce1ff>Anarchy</#5ce1ff> <gray>]━<white>◆<gray>━━"
+
+# ================= ПРИВИЛЕГИИ =================
+# price-ari - цена в /don (привилегии, Ari). При покупке старшего ранга платится только разница.
+# Выдача из донат-магазина/консоли: rank set <ник> <ранг> [дней] или ari give <ник> <кол-во>
+ranks:
+  player:
+    display: "Player"
+    symbol: "⚡"
+    prefix: "<gray>"
+    name-color: "#AAAAAA"
+    chat-color: "#DDDDDD"
+    weight: 0
+    homes: 2
+    regions: 1
+    rtp-cooldown: 600
+    warmup: 5
+    chat-cooldown: true
+    kill-multiplier: 1.0
+    price-ari: 0
+    icon: IRON_NUGGET
+    perks: []
+    description: ["2 дома, 1 приват, /rtp раз в 10 мин"]
+
+  traveler:
+    display: "Traveler"
+    symbol: "✧"
+    prefix: "<dark_gray>[<#7fd18b>Traveler</#7fd18b>]</dark_gray> "
+    name-color: "#7FD18B"
+    chat-color: "#EEEEEE"
+    weight: 10
+    homes: 3
+    regions: 2
+    rtp-cooldown: 300
+    warmup: 4
+    chat-cooldown: false
+    kill-multiplier: 1.2
+    price-ari: 99
+    icon: LEATHER_BOOTS
+    perks: [hat, tpahere, trash, ext, craft]
+    description: ["Тот, кто вечно в пути"]
+
+  hunter:
+    display: "Hunter"
+    symbol: "➹"
+    prefix: "<dark_gray>[<#e0a040>Hunter</#e0a040>]</dark_gray> "
+    name-color: "#E0A040"
+    chat-color: "#EEEEEE"
+    weight: 20
+    homes: 5
+    regions: 3
+    rtp-cooldown: 180
+    warmup: 3
+    chat-cooldown: false
+    kill-multiplier: 1.5
+    price-ari: 199
+    icon: BOW
+    perks: [rtp-far, hunt, stonecutter, loom, nv]
+    description: ["Находит жертву где угодно"]
+
+  phantom:
+    display: "Phantom"
+    symbol: "☁"
+    prefix: "<dark_gray>[<#9fb4d9>Phantom</#9fb4d9>]</dark_gray> "
+    name-color: "#9FB4D9"
+    chat-color: "#EEEEEE"
+    weight: 30
+    homes: 7
+    regions: 4
+    rtp-cooldown: 120
+    warmup: 2
+    chat-cooldown: false
+    kill-multiplier: 1.7
+    price-ari: 349
+    icon: PHANTOM_MEMBRANE
+    perks: [ghost, ec, anvil, grindstone, silent-join]
+    description: ["Его не видно, пока не станет поздно"]
+
+  lord:
+    display: "Lord"
+    symbol: "♜"
+    prefix: "<dark_gray>[<#d94f4f>Lord</#d94f4f>]</dark_gray> "
+    name-color: "#D94F4F"
+    chat-color: "#F5F5F5"
+    weight: 40
+    homes: 10
+    regions: 5
+    rtp-cooldown: 60
+    warmup: 1
+    chat-cooldown: false
+    kill-multiplier: 2.0
+    price-ari: 599
+    icon: GOLDEN_SWORD
+    perks: [rtp-player, feed, repair, back, top, smithing, cartography]
+    description: ["Хозяин своих земель"]
+
+  emperor:
+    display: "Emperor"
+    symbol: "♛"
+    prefix: "<dark_gray>[</dark_gray><gradient:#ffd700:#ff8c00>Emperor</gradient><dark_gray>]</dark_gray> "
+    name-color: "#FFD700"
+    chat-color: "#FFE9A8"
+    weight: 50
+    homes: 15
+    regions: 7
+    rtp-cooldown: 30
+    warmup: 0
+    chat-cooldown: false
+    kill-multiplier: 2.5
+    price-ari: 999
+    icon: GOLDEN_HELMET
+    perks: [heal, near, repair-all, fly, bc, join-broadcast]
+    description: ["Правит хаосом"]
+
+  overlord:
+    display: "Overlord"
+    symbol: "☠"
+    prefix: "<dark_gray>[</dark_gray><gradient:#ff0055:#aa00ff><bold>Overlord</bold></gradient><dark_gray>]</dark_gray> "
+    name-color: "#FF3377"
+    chat-color: "#FFD6E7"
+    weight: 60
+    homes: 25
+    regions: 10
+    rtp-cooldown: 10
+    warmup: 0
+    chat-cooldown: false
+    kill-multiplier: 3.0
+    price-ari: 1999
+    icon: NETHER_STAR
+    perks: [invsee, ecsee, color, ptime, pweather, daily-ari]
+    description: ["Выше него только небо"]
+
+  moder:
+    display: "Moder"
+    symbol: "⚑"
+    prefix: "<dark_gray>[<aqua><bold>Moder</bold></aqua>]</dark_gray> "
+    name-color: "#55FFFF"
+    chat-color: "#FFFFFF"
+    weight: 90
+    homes: 10
+    regions: 10
+    rtp-cooldown: 0
+    warmup: 0
+    chat-cooldown: false
+    kill-multiplier: 1.0
+    price-ari: 0
+    hidden: true
+    icon: SHIELD
+    perks: [mod, invsee, ecsee]
+    description: ["Модератор: /admin, /ban до 30 дней, /mute, /check"]
+
+  admin:
+    display: "Admin"
+    symbol: "✪"
+    prefix: "<dark_gray>[<red><bold>Admin</bold></red>]</dark_gray> "
+    name-color: "#FF5555"
+    chat-color: "#FFFFFF"
+    weight: 100
+    homes: 50
+    regions: 100
+    rtp-cooldown: 0
+    warmup: 0
+    chat-cooldown: false
+    kill-multiplier: 1.0
+    price-ari: 0
+    hidden: true
+    icon: COMMAND_BLOCK
+    perks: ["*"]
+    description: []
+
+perk-cooldowns:
+  hunt: 600
+  ghost: 1200
+  feed: 300
+  heal: 600
+  repair: 1800
+  back: 600
+  near: 60
+  rtp-far: 300
+  rtp-player: 600
+  top: 120
+  bc: 3600
+ghost-duration: 30
+ranks-30d-factor: 0.4        # привилегия на 30 дней = 40% от цены навсегда
+
+# ================= ПРИВАТЫ =================
+# Поставь блок привата - территория (2*radius+1)x(2*radius+1) на всю высоту твоя.
+regions:
+  min-distance-from-spawn: 100
+  tiers:
+    coal: {material: COAL_BLOCK, name: "<gray>Приват I <dark_gray>(11x11)", radius: 5, explosion-proof: false}
+    iron: {material: IRON_BLOCK, name: "<white>Приват II <dark_gray>(21x21)", radius: 10, explosion-proof: false}
+    gold: {material: GOLD_BLOCK, name: "<gold>Приват III <dark_gray>(31x31)", radius: 15, explosion-proof: false}
+    diamond: {material: DIAMOND_BLOCK, name: "<aqua>Приват IV <dark_gray>(51x51, от взрывов)", radius: 25, explosion-proof: true}
+    emerald: {material: EMERALD_BLOCK, name: "<green>Приват V <dark_gray>(81x81, от взрывов)", radius: 40, explosion-proof: true}
+    netherite: {material: NETHERITE_BLOCK, name: "<gradient:#ff4040:#aa00ff>Приват VI <dark_gray>(121x121, от взрывов)", radius: 60, explosion-proof: true}
+
+# ================= ТИТУЛЫ =================
+# условие: kills / playtime (минут) / streak / quests / balance / ari (покупка) / rank
+titles:
+  newbie: {display: "<gray>Новичок"}
+  killer: {display: "<red>Убийца", kills: 10}
+  maniac: {display: "<dark_red>Маньяк", kills: 100}
+  reaper: {display: "<gradient:#ff0000:#550000>Жнец", kills: 500}
+  survivor: {display: "<green>Выживший", playtime: 600}
+  oldtimer: {display: "<gold>Старожил", playtime: 6000}
+  unstoppable: {display: "<light_purple>Неудержимый", streak: 10}
+  quester: {display: "<aqua>Искатель", quests: 25}
+  tycoon: {display: "<yellow>Магнат", balance: 100000}
+  shadow: {display: "<dark_gray>Тень", ari: 29}
+  # --- только из кейса титулов ---
+  pirate: {display: "<#4fc3f7>⚓ Пират", case: true}
+  sailor: {display: "<#81d4fa>Мореход", case: true}
+  fisher: {display: "<#80cbc4>Рыбак", case: true}
+  wanderer: {display: "<#b0bec5>Бродяга", case: true}
+  shark: {display: "<#29b6f6>Акула", case: true}
+  storm: {display: "<gradient:#90caf9:#5c6bc0>⛈ Шторм</gradient>", case: true}
+  corsair: {display: "<gradient:#4dd0e1:#00838f>Корсар</gradient>", case: true}
+  kraken: {display: "<gradient:#ab47bc:#00e5ff>Кракен</gradient>", case: true}
+  leviathan: {display: "<gradient:#7c4dff:#18ffff>Левиафан</gradient>", case: true}
+  poseidon: {display: "<gradient:#ffd54f:#00b0ff>♆ Посейдон</gradient>", case: true}
+  abyss: {display: "<gradient:#311b92:#00e5ff>Повелитель Глубин</gradient>", case: true}
+  aquagod: {display: "<gradient:#ff0055:#00f0ff:#b000ff><bold>✦ AQUA GOD ✦</bold></gradient>", case: true}
+  demon: {display: "<gradient:#ff0040:#7000ff>Демон", ari: 49}
+  king: {display: "<gradient:#ffd700:#ff8c00>♛ Король", ari: 99}
+  god: {display: "<gradient:#00ffff:#ff00ff>Бог Анархии", ari: 199}
+  overlord: {display: "<gradient:#ff0055:#aa00ff>Повелитель", rank: overlord}
+  # --- боевой пропуск / сезон / сезонные кейсы ---
+  pass_free: {display: "<yellow>Ветеран сезона", case: true}
+  pass_premium: {display: "<gradient:#ffd700:#ff8c00>★ Легенда пропуска</gradient>", case: true}
+  champion1: {display: "<gradient:#ffd700:#fff176><bold>♛ Чемпион сезона</bold></gradient>", case: true}
+  champion2: {display: "<gradient:#e0e0e0:#9e9e9e><bold>Вице-чемпион</bold></gradient>", case: true}
+  champion3: {display: "<gradient:#ffab40:#8d6e63><bold>Бронза сезона</bold></gradient>", case: true}
+  snowman: {display: "<#e3f2fd>☃ Снеговик", case: true}
+  santa: {display: "<gradient:#ff1744:#ffffff>Дед Мороз</gradient>", case: true}
+  frost: {display: "<gradient:#80d8ff:#e1f5fe>❄ Ледяной Король</gradient>", case: true}
+  pumpkin: {display: "<#ff9800>Тыква", case: true}
+  ghost: {display: "<gradient:#b0bec5:#eceff1>Призрак</gradient>", case: true}
+  reaper13: {display: "<gradient:#ff6f00:#4a148c>☠ Король Хэллоуина</gradient>", case: true}
+
+# ================= КВЕСТЫ =================
+# Каждый день игрок получает 3 случайных квеста. Типы: KILL_PLAYER, KILL_MOB, MINE, PLACE, FISH, PLAYTIME, AIRDROP
+quests:
+  daily-count: 3
+  all-done-bonus: 300
+  all-done-ari: 1
+  all-done-key: title        # +1 ключ кейса титулов за все квесты дня
+  pool:
+    kill_players: {name: "Убить 3 игроков", type: KILL_PLAYER, amount: 3, reward: 400}
+    kill_mobs: {name: "Убить 40 мобов", type: KILL_MOB, amount: 40, reward: 150}
+    mine_stone: {name: "Добыть 256 камня", type: MINE, materials: [STONE, COBBLESTONE, DEEPSLATE, COBBLED_DEEPSLATE, ANDESITE, DIORITE, GRANITE, TUFF], amount: 256, reward: 120}
+    mine_diamond: {name: "Добыть 5 алмазной руды", type: MINE, materials: [DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE], amount: 5, reward: 350}
+    mine_iron: {name: "Добыть 24 железной руды", type: MINE, materials: [IRON_ORE, DEEPSLATE_IRON_ORE], amount: 24, reward: 200}
+    mine_logs: {name: "Срубить 64 бревна", type: MINE, materials: ["*_LOG"], amount: 64, reward: 120}
+    mine_debris: {name: "Найти 2 древних обломка", type: MINE, materials: [ANCIENT_DEBRIS], amount: 2, reward: 600}
+    place: {name: "Поставить 300 блоков", type: PLACE, amount: 300, reward: 120}
+    fish: {name: "Поймать 10 рыб", type: FISH, amount: 10, reward: 180}
+    play: {name: "Отыграть 60 минут", type: PLAYTIME, amount: 60, reward: 250}
+    airdrop: {name: "Открыть аирдроп", type: AIRDROP, amount: 1, reward: 500}
+
+# ================= ИВЕНТЫ =================
+# Ивенты идут по кругу (rotation) каждые interval-minutes. Боссбар ивента виден только в bossbar-radius блоках.
+# /event delay - что идёт сейчас, где, и когда следующий. Запуск вручную: /event start <тип>
+events:
+  interval-minutes: 15
+  bossbar-radius: 20
+  rotation: [airdrop, meteor, boss, zeus, airdrop, dungeon, meteor, tournament]
+  # Редкости: common (обычный) / rare (редкий) / epic (эпический) / divine (божественный). Вес = шанс выпадения
+  rarity-weights: {common: 50, rare: 30, epic: 15, divine: 5}
+  # Пулы для строк "pool:<имя>:шанс%" - выдаётся один случайный предмет пула
+  pools:
+    # вес после * : чем больше, тем чаще (без * - равные шансы)
+    talismans_low: ["custom:talisman_fish*55", "custom:talisman_jellyfish*30", "custom:talisman_turtle*15"]
+    talismans_mid: ["custom:talisman_dolphin*65", "custom:talisman_shark*35"]
+    talismans_top: ["custom:talisman_kraken*75", "custom:talisman_poseidon*25"]
+    spheres_low: ["custom:sphere_fish*55", "custom:sphere_jellyfish*30", "custom:sphere_turtle*15"]
+    spheres_mid: ["custom:sphere_dolphin"]                      # обычный/редкий лут: максимум Дельфин
+    spheres_high: ["custom:sphere_shark*75", "custom:sphere_kraken*25"] # Акула и выше - только эпик/божественный
+    legendary: ["custom:kratos_blade", "custom:leviathan_axe", "custom:artemis_bow", "custom:zeus_trident", "custom:hades_scythe", "custom:poseidon_mace", "custom:apollo_crossbow", "custom:ares_shield", "custom:hermes_boots"]
+    tools: ["custom:titan_pickaxe", "custom:hephaestus_drill"]
+    special: ["custom:golden_dome*20", "custom:truth_snow*25", "custom:aqua_charge*15", "custom:sea_aura*15", "custom:temple_wall*10", "custom:coral_net*15"]   # спец-предметы
+    don_potions: ["custom:athena_kiss*25", "custom:reaper_blood*20", "custom:storm_potion*25", "custom:fugu_potion*30", "custom:rage_potion*20"]   # донатные зелья
+    olympus: ["custom:olympus_helmet", "custom:olympus_chestplate", "custom:olympus_leggings", "custom:olympus_boots"]
+    books: ["enchant:telekinesis:1", "enchant:autosmelt:1", "enchant:vampirism:1", "enchant:explosive:1"]
+    books_top: ["enchant:vampirism:3", "enchant:explosive:3", "enchant:telekinesis:1", "enchant:autosmelt:1"]
+  # Лут по редкостям - общий для аирдропа, метеорита, босса, Стрелы Зевса и Посейдона (+ bonus у каждого ивента)
+  # предмет:кол-во(или a-b):шанс%  custom:<id>:шанс%  coins:<сумма|a-b>:шанс%  ari:<n>:шанс%  key:<кейс>:<n>:шанс%
+  # enchant:<id>:<ур>:шанс%  region:<тип>:шанс%  pool:<пул>:шанс%.  min-items - минимум предметов (добирается по шансам)
+  loot:
+    common:
+      min-items: 6
+      items: ["GOLDEN_APPLE:2-5:80", "DIAMOND:3-8:65", "IRON_INGOT:8-20:60", "ENDER_PEARL:4-8:55", "EXPERIENCE_BOTTLE:16-32:55", "COOKED_BEEF:16-32:40", "ARROW:16-32:30", "TNT:4-12:25", "OBSIDIAN:8-16:25", "coins:300-800:70", "key:ari:1:30", "key:titles:1:15", "pool:books:10", "pool:talismans_low:12", "pool:spheres_low:4", "TOTEM_OF_UNDYING:1:8", "pool:special:2", "pool:don_potions:2"]
+    rare:
+      min-items: 7
+      items: ["pool:talismans_low:45", "pool:talismans_mid:12", "GOLDEN_APPLE:4-8:80", "ENCHANTED_GOLDEN_APPLE:1:8", "DIAMOND:8-16:75", "NETHERITE_SCRAP:1-3:40", "ENDER_PEARL:8-16:60", "EXPERIENCE_BOTTLE:32-64:60", "TOTEM_OF_UNDYING:1:45", "TNT:8-16:30", "coins:1000-2000:75", "ari:2-5:20", "key:ari:1-2:45", "key:titles:1:30", "key:donate:1:3", "pool:books:30", "pool:spheres_low:14", "custom:sphere_dolphin:4", "pool:tools:5", "pool:legendary:3", "region:gold:10", "pool:special:4", "pool:don_potions:4"]
+    epic:
+      min-items: 8
+      items: ["pool:spheres_low:30", "custom:sphere_dolphin:18", "custom:sphere_shark:7", "pool:talismans_mid:45", "pool:talismans_top:8", "ENCHANTED_GOLDEN_APPLE:1:25", "GOLDEN_APPLE:8-16:70", "DIAMOND:12-24:70", "NETHERITE_INGOT:1-2:45", "TOTEM_OF_UNDYING:1-2:65", "ENDER_PEARL:16:60", "EXPERIENCE_BOTTLE:64:60", "coins:2500-5000:80", "ari:5-10:35", "key:ari:2-3:50", "key:donate:1:10", "pool:books_top:35", "pool:legendary:15", "pool:olympus:8", "pool:tools:12", "custom:sphere_kraken:2", "region:diamond:12", "ELYTRA:1:3", "pool:special:7", "pool:don_potions:7"]
+    divine:
+      min-items: 10
+      items: ["custom:sphere_dolphin:35", "custom:sphere_shark:22", "custom:sphere_kraken:10", "pool:talismans_top:35", "pool:talismans_mid:60", "pool:legendary:60", "pool:olympus:50", "pool:books_top:60", "ENCHANTED_GOLDEN_APPLE:1-2:50", "NETHERITE_INGOT:2-4:70", "TOTEM_OF_UNDYING:2-3:80", "DIAMOND_BLOCK:2-5:60", "NETHER_STAR:1:20", "ELYTRA:1:15", "custom:sphere_poseidon:3", "coins:6000-12000:90", "ari:15-30:50", "key:donate:1-2:35", "key:ari:3-5:60", "pool:tools:30", "region:emerald:15", "pool:special:15", "pool:don_potions:15"]
+  # Аирдроп и метеорит (по мотивам FunTime): лут выдаётся «неизвестными предметами» ❓ по одному раз в drip-seconds,
+  # что выпало - видно, когда забрал в инвентарь. К ценному луту (loot) добавляются ресурсы отсюда (resource-rolls раз).
+  # Пока предмет не появился, слоты заняты заглушками «Ожидание...» (их нельзя забрать). Формат строк как в loot.
+  resources:
+    common:
+      min-items: 12
+      items: ["IRON_INGOT:16-32:85", "GOLD_INGOT:8-24:60", "COAL:24-64:60", "REDSTONE:16-48:45", "LAPIS_LAZULI:16-32:40", "DIAMOND:3-8:55", "EMERALD:4-12:35", "OBSIDIAN:8-24:45", "COOKED_BEEF:24-64:65", "GOLDEN_CARROT:8-24:40", "BREAD:16-32:30", "ENDER_PEARL:2-6:40", "EXPERIENCE_BOTTLE:16-32:55", "ARROW:32-64:35", "OAK_LOG:32-64:35", "STONE_BRICKS:32-64:20", "TNT:4-12:25", "GUNPOWDER:8-24:30", "STRING:8-24:20", "GOLDEN_APPLE:1-3:30", "SLIME_BALL:4-8:10"]
+    rare:
+      min-items: 14
+      items: ["IRON_INGOT:24-48:85", "GOLD_INGOT:16-32:65", "IRON_BLOCK:2-6:35", "DIAMOND:6-14:65", "EMERALD:8-20:45", "REDSTONE:32-64:45", "LAPIS_LAZULI:24-48:40", "OBSIDIAN:16-32:55", "ANCIENT_DEBRIS:1-2:20", "NETHERITE_SCRAP:1:12", "COOKED_BEEF:32-64:65", "GOLDEN_CARROT:16-32:50", "ENDER_PEARL:4-10:50", "EXPERIENCE_BOTTLE:32-64:60", "GOLDEN_APPLE:2-6:50", "TNT:8-16:35", "ARROW:64:35", "SPECTRAL_ARROW:16-32:20", "END_CRYSTAL:1-3:15", "QUARTZ:32-64:25", "GLOWSTONE:16-32:20"]
+    epic:
+      min-items: 16
+      items: ["IRON_BLOCK:4-12:75", "GOLD_BLOCK:2-8:55", "DIAMOND:12-24:75", "DIAMOND_BLOCK:1-2:20", "EMERALD_BLOCK:2-6:40", "NETHERITE_SCRAP:1-4:40", "ANCIENT_DEBRIS:2-4:35", "OBSIDIAN:32-64:60", "CRYING_OBSIDIAN:8-16:25", "GOLDEN_APPLE:6-12:65", "ENDER_PEARL:8-16:60", "EXPERIENCE_BOTTLE:64:70", "TNT:16-32:45", "END_CRYSTAL:4-8:40", "RESPAWN_ANCHOR:1-2:25", "GLOWSTONE:32-64:30", "GOLDEN_CARROT:32-64:50", "TOTEM_OF_UNDYING:1:15", "SHULKER_SHELL:2-4:12"]
+    divine:
+      min-items: 18
+      items: ["DIAMOND_BLOCK:2-6:70", "NETHERITE_INGOT:1-2:45", "ANCIENT_DEBRIS:4-8:55", "NETHERITE_SCRAP:4-8:40", "EMERALD_BLOCK:4-10:50", "GOLD_BLOCK:8-16:60", "IRON_BLOCK:16-32:70", "OBSIDIAN:64:60", "ENCHANTED_GOLDEN_APPLE:1:12", "GOLDEN_APPLE:12-24:70", "ENDER_PEARL:16:70", "EXPERIENCE_BOTTLE:64:80", "END_CRYSTAL:8-16:55", "RESPAWN_ANCHOR:2-4:35", "TNT:32-64:45", "TOTEM_OF_UNDYING:1-2:30", "SHULKER_SHELL:4-8:25", "NETHER_STAR:1:5", "GOLDEN_CARROT:64:50"]
+  airdrop:
+    min-radius: 300
+    max-radius: 2500
+    unlock-seconds: 50               # сундук открывается через N сек
+    despawn-minutes: 4               # и исчезает через N минут
+    drip-seconds: 3                  # «неизвестный дроп»: +1 предмет в сундук раз в N сек
+    resource-rolls: 2                # сколько раз добавить к луту набор ресурсов (events.resources)
+    extra-interval-minutes: 20       # доп. аирдроп каждые N минут помимо ротации (0 = выкл)
+    rarity-weights: {common: 55, rare: 28, epic: 13, divine: 4}
+  boss:
+    name: "<gradient:#7000ff:#ff0040><bold>Страж Бездны</bold></gradient>"
+    health: 800
+    min-radius: 300
+    max-radius: 2000
+    reward-coins: 2000
+    reward-ari: 10
+    chest-unlock-seconds: 3          # сундук с лутом на месте смерти босса открывается через 3 сек
+    chest-minutes: 5                 # и исчезает через 5 минут (или когда опустеет)
+    rarity-weights: {common: 0, rare: 45, epic: 40, divine: 15}
+    bonus:
+      rare: ["NETHERITE_INGOT:1:60"]
+      epic: ["NETHERITE_INGOT:1-2:80", "pool:legendary:20", "custom:sphere_shark:5"]
+      divine: ["custom:sphere_kraken:8", "custom:sphere_poseidon:5", "pool:legendary:60"]
+  # Метеорит: предупреждение, падение, воронка и сундук-ядро. После ивента рельеф восстанавливается полностью
+  meteor:
+    min-radius: 300
+    max-radius: 2200
+    warn-seconds: 60                 # предупреждение до падения
+    despawn-minutes: 4               # воронка и ядро держатся N минут
+    drip-seconds: 3                  # «неизвестный дроп»: +1 предмет в ядро раз в N сек
+    resource-rolls: 2
+    rarity-weights: {common: 40, rare: 33, epic: 20, divine: 7}
+    crater-radius: {common: 4, rare: 5, epic: 6, divine: 7}
+    bonus:
+      common: ["ANCIENT_DEBRIS:1-2:50", "MAGMA_BLOCK:8-16:40"]
+      rare: ["ANCIENT_DEBRIS:2-4:70", "NETHERITE_SCRAP:1-2:40"]
+      epic: ["ANCIENT_DEBRIS:4-6:80", "custom:hephaestus_drill:8"]
+      divine: ["ANCIENT_DEBRIS:6-10:90", "NETHERITE_INGOT:2:50", "custom:hephaestus_drill:20"]
+  # Стрела Зевса: облако в небе, молнии зажигают огни - потуши огонь N раз (ЛКМ) и забери лут его редкости. PvP включено
+  zeus:
+    min-radius: 300
+    max-radius: 1800
+    minutes: 3                       # длительность ивента
+    radius: 25                       # радиус облака (не больше 25)
+    min-height: 80                   # облако не ниже y=80 (и на 10 блоков выше рельефа)
+    clearance: 10
+    extinguish: {common: 5, rare: 7, epic: 10, divine: 14}
+    strike-seconds: {min: 5, max: 10}  # молния каждые 5-10 сек (если огней максимум - молния-декор)
+    max-fires: 8
+    loot-min: 1                      # предметов с одного огня: от loot-min до loot-max
+    loot-max: 3
+    hit-cooldown-ms: 300
+    bar-radius: 70
+    rarity-weights: {common: 50, rare: 30, epic: 15, divine: 5}
+  # Подземелье дьявола: портал на спавне открыт 5 мин, 3 уровня по 5 мин. С мобов - Сердца моря, на 3-м - босс Дьявол
+  dungeon:
+    level-minutes: 5
+    max-players: 0                   # 0 - без лимита
+    hearts: {level1: 1, level2: 2, boss: 0}   # сердец с моба (boss - каждому за убийство босса)
+    respawn-ms: 1500
+    mobs:
+      level1: {base: 6, per-player: 2, max: 18, health: 26}
+      level2: {base: 5, per-player: 2, max: 16, health: 24}
+    boss: {health: 300, health-per-player: 120, damage: 10, armor: 12, scale: 1.7, slam-damage: 7, ring-damage: 5, minions-max: 6, minion-health: 24}
+    # Посейдон: цена в Сердцах моря за лут каждой редкости
+    poseidon: {common: 10, rare: 25, epic: 50, divine: 100, accept-vanilla: false}
+    # Каждому игроку за убийство Дьявола (уровень сложности ~ эпик)
+    boss-bonus: ["pool:talismans_mid:35", "pool:spheres_low:25", "custom:sphere_dolphin:10", "custom:sphere_shark:4", "custom:sphere_kraken:1.5", "pool:special:4", "pool:don_potions:4"]
+    portal:
+      box: "329,7,299,335,15,299"            # блоки портала на спавне
+      exit: "spawn;332.5;6;301.5;0;0"        # куда выходят из подземелья
+      holo: "spawn;322.5;7.0;303.5"          # голограмма портала (на площадке слева, напротив Посейдона)
+      closed-block: "minecraft:blue_stained_glass"   # чем запечатан портал вне ивента
+    allowed-commands: [event, events, msg, r, tell, w, m, reply, cc, l, login]
+  # PvP-турнир на отдельной арене: свой кит, инвентарь сохраняется, зона сужается
+  tournament:
+    join-seconds: 90
+    min-players: 2
+    max-players: 24
+    max-minutes: 10
+    reward-coins: 5000
+    reward-ari: 15
+    bonus: ["pool:talismans_mid:50", "pool:spheres_low:35", "custom:sphere_dolphin:15", "custom:sphere_shark:5", "pool:special:5", "pool:don_potions:5"]   # победителю
+
+# ================= ЛИМИТЫ / АНТИЛАГ =================
+limits:
+  disable-phantoms: true           # фантомы не спавнятся (бессонница выключена во всех мирах)
+  spawners-per-chunk: 6
+  hoppers-per-chunk: 32
+  observers-per-chunk: 48
+  pistons-per-chunk: 64
+  redstone-updates-per-second: 400   # больше в чанке - часы ломаются
+  piston-moves-per-second: 120
+  mobs-per-chunk: 40
+  same-animals-per-chunk: 24
+  clear-items-minutes: 10            # очистка выброшенных предметов (предупреждения 60/30/10/5..1 сек)
+
+# ================= КЛАНЫ /clan =================
+clans:
+  create-cost: 5000
+  max-members: 15
+  war-minutes: 60
+  chest-officers-only: false     # true - клановый сундук только для главы и офицеров
+  # Опыт клана
+  xp:
+    kill: 10                     # убийство игрока не из клана
+    war-kill: 10                 # доп. опыт за убийство во время войны
+    kill-same-victim-minutes: 10 # за одного и того же игрока опыт раз в N минут (антифарм)
+    online-member-10min: 2       # за каждого участника онлайн (не на спавне) каждые 10 минут
+    deposit-coins-per-xp: 100    # +1 опыт за каждые 100 монет, вложенные в банк (снятие не даёт фарм)
+    koth: 150                    # победа в KOTH
+    war-win: 300                 # победа в войне кланов
+  # Уровни: опыт, лимит участников, ряды кланового сундука (/clan chest), бафы для онлайн-участников вне спавна
+  levels:
+    1: {xp: 0, members: 15, chest-rows: 0, buffs: []}
+    2: {xp: 500, members: 16, chest-rows: 1, buffs: []}
+    3: {xp: 1500, members: 18, chest-rows: 2, buffs: ["HASTE:0"]}
+    4: {xp: 3500, members: 20, chest-rows: 3, buffs: ["HASTE:0"]}
+    5: {xp: 7000, members: 22, chest-rows: 3, buffs: ["HASTE:0", "NIGHT_VISION:0"]}
+    6: {xp: 12000, members: 24, chest-rows: 4, buffs: ["HASTE:0", "NIGHT_VISION:0", "FIRE_RESISTANCE:0"]}
+    7: {xp: 20000, members: 26, chest-rows: 4, buffs: ["HASTE:1", "NIGHT_VISION:0", "FIRE_RESISTANCE:0"]}
+    8: {xp: 32000, members: 28, chest-rows: 5, buffs: ["HASTE:1", "NIGHT_VISION:0", "FIRE_RESISTANCE:0", "SPEED:0"]}
+    9: {xp: 50000, members: 30, chest-rows: 5, buffs: ["HASTE:1", "NIGHT_VISION:0", "FIRE_RESISTANCE:0", "SPEED:0"]}
+    10: {xp: 75000, members: 35, chest-rows: 6, buffs: ["HASTE:1", "NIGHT_VISION:0", "FIRE_RESISTANCE:0", "SPEED:0", "LUCK:0"]}
+
+# ================= ТЕРРИТОРИИ КЛАНОВ (/clan zones) =================
+# Встань на точку только своим кланом и удерживай capture-seconds - точка твоя.
+# Если на точке есть чужие (или игроки без клана) - захват оспаривается и замирает.
+# Владелец получает income-coins в банк клана и income-xp опыта каждые income-minutes (если кто-то из клана онлайн).
+territories:
+  enabled: true
+  world: world
+  radius: 12
+  capture-seconds: 180
+  capture-xp: 100
+  income-minutes: 60
+  income-coins: 1500
+  income-xp: 50
+  income-needs-online: true
+  points:
+    north: {name: "Северный форт", x: 0, z: -1500}
+    east: {name: "Восточная шахта", x: 1500, z: 0}
+    south: {name: "Южный рынок", x: 0, z: 1500}
+    west: {name: "Западная крепость", x: -1500, z: 0}
+    center: {name: "Сердце анархии", x: 750, z: 750}
+
+# ================= АВТОБЭКАПЫ =================
+# Каждые interval-hours сервер сохраняет миры и делает zip в папку backups/ (рядом с paper.jar).
+# Восстановление: остановить сервер, удалить папки миров, распаковать нужный архив в папку сервера.
+backups:
+  enabled: true
+  interval-hours: 6
+  first-after-minutes: 30   # первый бэкап через N минут после запуска
+  keep: 8                   # сколько последних архивов хранить
+  max-age-days: 0           # 0 = не удалять по возрасту
+  folder: backups
+  compression: 3            # 0-9 (больше = меньше размер, дольше)
+  include-plugins: true     # данные AnarchyCore (игроки, кланы, приваты, баны...)
+  worlds: [world, world_nether, world_the_end, spawn]
+  extra: []                 # доп. папки/файлы, напр. ["plugins/GrimAC"]
+
+# ================= АУКЦИОН /ah =================
+auction:
+  tax-percent: 5
+  hours: 48
+  max-lots: 5
+  max-price: 100000000
+  announce: true
+
+# ================= БУСТЫ И СКИДКИ =================
+# Буст x2 действует на ВЕСЬ сервер. Цены в Ari. Выдать: aqua boost <ник> coins|pass [минут]
+boosts:
+  minutes: 60
+  coins: {price: 99, multiplier: 2.0}
+  pass: {price: 79, multiplier: 2.0}
+sales:
+  timezone: Europe/Moscow
+  weekend-percent: 15          # скидка в сб/вс
+  start-percent: 30            # скидка открытия сервера
+  start-until: 1792982575000     # мс; задать: /aqua startsale <дней> [процент]
+  # временная акция: /aqua sale <процент> <часов> [название]
+
+# ================= АНТИБОТ =================
+antibot:
+  enabled: true
+  captcha: true                # капча для новых игроков: падают в отдельном мире, пока не решат
+  # виды: digits (цифры на карте), letters (буквы), math (пример), count (посчитать круги),
+  #       color (нажать блок нужного цвета), item (нажать нужный предмет), order (нажать 1-2-3-4 по порядку)
+  captcha-types: [digits, letters, math, count, color, item, order]
+  captcha-seconds: 120         # время на капчу
+  captcha-attempts: 3          # попыток (после ошибки даётся другая капча)
+  attack-threshold: 8          # столько новых входов за 10 сек = бот-атака
+  attack-seconds: 120          # режим атаки: новым игрокам вход запрещён
+  joins-per-ip-30s: 5
+  max-online-per-ip: 3
+  max-accounts-per-ip: 3
+  exempt-ips: ["127.0.0.1"]   # через туннель (bore/playit) все IP = 127.0.0.1 - оставь в исключениях
+
+# ================= БОЕВОЙ ПРОПУСК =================
+pass:
+  premium-price: 149            # Ari. Выдать: aqua pass premium <ник>
+  xp-per-level: 100
+
+# ================= ВАРПЫ ИГРОКОВ /pwarp =================
+pwarps:
+  cost: 2000
+  ad-cost: 1000
+  ad-hours: 24
+  base-limit: 1
+
+# ================= ПРОМОКОДЫ /code =================
+# Создать: /codes create <КОД> <награды> [активаций] [дней]
+# Код ютубера: /codes creator <КОД> <ник_ютубера> <награды_игроку> [награда_ютуберу]
+# Награды через запятую: coins:5000,ari:10,key:ari:2,rank:hunter,enchant:telekinesis:1,title:pirate
+codes:
+  creator-max-hours: 10            # код автора могут ввести только игроки с наигранным временем до N часов (0 - все)
+  default-creator-reward: "ari:1"  # награда ютуберу за каждого активировавшего, если не указана
+
+# ================= ЖАЛОБЫ / X-RAY =================
+reports:
+  cooldown-seconds: 20
+xray:
+  window-minutes: 20               # окно подсчёта
+  diamond-veins: 6                 # жил алмазов за окно = подозрение
+  debris-veins: 5                  # жил древних обломков за окно
+  max-veins-per-100-stone: 3.0     # или слишком мало камня на найденные жилы
+
+# ================= ЗАЩИТА ОТ ЭКСПЛОЙТОВ =================
+exploits:
+  book-max-pages: 50
+  book-max-page-chars: 320
+  book-max-bytes: 12000
+  max-item-bytes: 60000            # шалкер/книга тяжелее - удаляется (защита от книжных банов)
+  remove-illegal-items: true       # бедрок, барьеры, командные блоки и т.п. у не-операторов
+  remove-illegal-enchants: true    # уровни выше 10 (32к) сбрасываются до максимума
+  max-enchant-level: 10
+  pearl-glitch-fix: true           # жемчуг не телепортирует внутрь блоков
+  block-inventory-entity-portals: true   # ослы/ламы/вагонетки с сундуком не проходят порталы (дюп)
+  commands-per-5s: 12
+  commands-kick-per-5s: 25
+  hanging-per-chunk: 64
+  armor-stands-per-chunk: 32
+
+# ================= АДМИНКА =================
+admin:
+  appeal: "discord сервера"
+  check-text: "Напиши свой Discord в чат и жди проверяющего. Признание сокращает бан. Выход = бан."
+
+# ================= ВАРПЫ (/warp или /warps, кнопка в /menu) =================
+# Варп переносит к NPC на спавне: встаёшь перед ним, лицом к нему (задержка как у /spawn, в бою нельзя).
+# npc - id из раздела npcs. Свой варп без NPC: location: "мир;x;y;z;yaw;pitch". aliases - другие названия для /warp
+warps:
+  pvp:
+    npc: pvp
+    name: "<gradient:#ff3355:#ff9900>⚔ PvP-Арена</gradient>"
+    icon: NETHERITE_SWORD
+    aliases: [arena, пвп, арена]
+    lore: ["<gray>Воин в воротах - вход на арену", "<gray>Шалкеры, яма в Ад, Элитный шалкер"]
+  auction:
+    npc: auction
+    name: "<gold>Аукцион"
+    icon: GOLD_BLOCK
+    aliases: [ah, аукцион]
+    lore: ["<gray>Торговля с игроками"]
+  shop:
+    npc: shop
+    name: "<light_purple>Донат-магазин"
+    icon: NETHER_STAR
+    aliases: [donshop, магазин]
+    lore: ["<gray>Предметы, книги, бусты"]
+  clans:
+    npc: clans
+    name: "<aqua>Кланы"
+    icon: WHITE_BANNER
+    aliases: [clan, кланы]
+    lore: ["<gray>Создать или вступить в клан"]
+  pass:
+    npc: pass
+    name: "<gold>Боевой пропуск"
+    icon: EXPERIENCE_BOTTLE
+    aliases: [пропуск]
+    lore: ["<gray>50 уровней наград"]
+  poseidon:
+    npc: poseidon
+    name: "<aqua>Посейдон"
+    icon: TRIDENT
+    aliases: [посейдон]
+    lore: ["<gray>Обмен Сердец моря на лут"]
+  mine:
+    name: <gold>⛏ Автошахта
+    icon: IRON_PICKAXE
+    location: spawn;300.5;6.0;351.5;90.0;20.0
+    aliases:
+    - шахта
+    - automine
+    lore:
+    - <gray>Руда 5 уровней редкости
+    - <gray>Обновляется каждые 7 минут
+
+# ================= PVP-АРЕНА (/pvp или NPC в воротах у купола спавна) =================
+# Отдельный мир "pvp": зелёный остров с холмами, кастомными деревьями, вышками и постройками,
+# лут-шалкеры 4 редкостей в определённых местах, в центре яма в Ад - два прохода к залу Элитного шалкера.
+# Площадь появления - безопасная зона (PvP выключено), за её границей PvP работает. Остров окружён барьером.
+# Порталов нет: выход на спавн - /spawn, из Ада наверх - пузырьковый подъём в зале Элитного шалкера.
+# Карта строится один раз при первом запуске. Перестроить: /pvp rebuild + рестарт. Дорога на спавне: /pvp hub, откат: /pvp unhub
+pvp-arena:
+  enabled: true
+  safe-radius: 11                 # радиус сферы безопасной зоны (центр - середина площади на уровне пола)
+  temp-block-seconds: 60           # блоки, поставленные игроками, исчезают (карту не ломают)
+  # Шалкеры ломаются ударами (любым предметом), над ними пишется, сколько ударов осталось.
+  # После поломки выпадает лут, шалкер появляется снова через cooldown-seconds своей редкости (таймер над местом).
+  # Где какие: обычные - святилища, лагерь, рынок, хижина; редкие - вышки и бункер; эпические - храм и форт; легендарные - в Аду.
+  shulkers:
+    common:
+      name: "<white>Обычный"
+      block: WHITE_SHULKER_BOX
+      hits: 20
+      cooldown-seconds: 120
+      items-min: 2
+      items-max: 4
+      loot:                        # "ПРЕДМЕТ вес": чем больше вес, тем чаще выпадает. Формат предмета как в китах
+      - "COOKED_BEEF:16 14"
+      - "GOLDEN_CARROT:12 10"
+      - "ARROW:24 8"
+      - "EXPERIENCE_BOTTLE:16 8"
+      - "COBWEB:6 6"
+      - "OBSIDIAN:16 6"
+      - "ENDER_PEARL:2 6"
+      - "GOLDEN_APPLE:1 5"
+      - "IRON_HELMET:1:protection=2 4"
+      - "IRON_CHESTPLATE:1:protection=2 4"
+      - "IRON_LEGGINGS:1:protection=2 4"
+      - "IRON_BOOTS:1:protection=2 4"
+      - "IRON_SWORD:1:sharpness=2 4"
+      - "BOW:1 3"
+    rare:
+      name: "<aqua>Редкий"
+      block: LIGHT_BLUE_SHULKER_BOX
+      hits: 35
+      cooldown-seconds: 300
+      items-min: 3
+      items-max: 5
+      loot:
+      - "GOLDEN_APPLE:3 12"
+      - "ENDER_PEARL:4 10"
+      - "EXPERIENCE_BOTTLE:32 8"
+      - "OBSIDIAN:32 6"
+      - "END_CRYSTAL:2 5"
+      - "DIAMOND_HELMET:1:protection=2 4"
+      - "DIAMOND_CHESTPLATE:1:protection=2 4"
+      - "DIAMOND_LEGGINGS:1:protection=2 4"
+      - "DIAMOND_BOOTS:1:protection=2 4"
+      - "DIAMOND_SWORD:1:sharpness=3 4"
+      - "BOW:1:power=3 3"
+      - "TOTEM_OF_UNDYING:1 2"
+    epic:
+      name: "<light_purple>Эпический"
+      block: PURPLE_SHULKER_BOX
+      hits: 60
+      cooldown-seconds: 600
+      items-min: 4
+      items-max: 6
+      loot:
+      - "GOLDEN_APPLE:6 10"
+      - "END_CRYSTAL:4 8"
+      - "RESPAWN_ANCHOR:2 6"
+      - "GLOWSTONE:8 6"
+      - "TOTEM_OF_UNDYING:1 6"
+      - "DIAMOND_HELMET:1:protection=4,unbreaking=3 4"
+      - "DIAMOND_CHESTPLATE:1:protection=4,unbreaking=3 4"
+      - "DIAMOND_LEGGINGS:1:protection=4,unbreaking=3 4"
+      - "DIAMOND_BOOTS:1:protection=4,feather_falling=4,unbreaking=3 4"
+      - "DIAMOND_SWORD:1:sharpness=5,unbreaking=3 4"
+      - "NETHERITE_INGOT:1 2"
+    legendary:
+      name: "<gold>Легендарный"
+      block: ORANGE_SHULKER_BOX
+      hits: 100
+      cooldown-seconds: 1200
+      items-min: 5
+      items-max: 7
+      loot:
+      - "ENCHANTED_GOLDEN_APPLE:1 3"
+      - "TOTEM_OF_UNDYING:2 8"
+      - "END_CRYSTAL:8 8"
+      - "RESPAWN_ANCHOR:4 6"
+      - "NETHERITE_INGOT:2 6"
+      - "NETHERITE_HELMET:1:protection=4,unbreaking=3 3"
+      - "NETHERITE_CHESTPLATE:1:protection=4,unbreaking=3 3"
+      - "NETHERITE_LEGGINGS:1:protection=4,unbreaking=3 3"
+      - "NETHERITE_BOOTS:1:protection=4,feather_falling=4,unbreaking=3 3"
+      - "NETHERITE_SWORD:1:sharpness=5,fire_aspect=2,unbreaking=3 3"
+  elite:
+    times: ["14:00", "17:00", "20:00", "23:00"]   # когда появляется Элитный шалкер (МСК). Вручную: /pvp elite
+    warn-minutes: 5                # за сколько минут предупредить весь сервер
+    hits: 500                      # ударов киркой, чтобы сломать
+    despawn-minutes: 30            # не сломали за это время - исчезает
+    drops:                         # выпадает на алтарь
+    - "NETHERITE_SWORD:1:sharpness=6,fire_aspect=2,looting=3,unbreaking=3,mending=1"
+    - "NETHERITE_HELMET:1:protection=5,unbreaking=3,mending=1"
+    - "NETHERITE_CHESTPLATE:1:protection=5,unbreaking=3,mending=1"
+    - "NETHERITE_LEGGINGS:1:protection=5,unbreaking=3,mending=1"
+    - "NETHERITE_BOOTS:1:protection=5,feather_falling=4,unbreaking=3,mending=1"
+    - "ENCHANTED_GOLDEN_APPLE:2"
+    - "TOTEM_OF_UNDYING:4"
+    - "NETHERITE_INGOT:4"
+    - "custom:titan_pickaxe"
+    rewards:                       # лично тому, кто добил: coins:N, ari:N, key:<кейс>:N
+    - "ari:50"
+    - "key:donate:1"
+
+# ================= ИИ-АНТИЧИТ AquaGuard =================
+# Собирает улики (аим, килл-аура, автокликер, кристалл/якорь-аура, автототем, InvMove, стилер, чит-клиенты,
+# флаги GrimAC, X-Ray) и считает вероятность читов. Выше watch-threshold - усиленно следит за игроком,
+# выше call-threshold - вызывает на проверку: игрок замораживается, модераторам приходит письмо с кнопкой
+# «Принять». Принявший получает все сообщения античита об игроке. Команда для персонала: /ac
+# ИИ учится на решениях модераторов: /check stop = чист, /check ban (или любой бан) = читер.
+anticheat:
+  enabled: true
+  name: "AquaGuard AI"
+  watch-threshold: 0.40            # вероятность читов, с которой ИИ начинает усиленно следить
+  call-threshold: 0.93             # вероятность, с которой ИИ вызывает на проверку
+  min-events: 5                    # минимум подозрительных эпизодов для вызова (кроме чит-клиента)
+  require-staff-online: true       # вызывать только если в сети есть модератор (иначе - письмо в почту)
+  accept-timeout-minutes: 5        # никто не принял проверку за это время - игрок отпускается
+  recall-cooldown-minutes: 30      # повторный вызов того же игрока не раньше
+  clean-cooldown-minutes: 120      # после решения «чист» не вызывать столько минут
+  ban-on-quit-before-accept: true  # выход до того, как модератор принял проверку, тоже бан 30 дней
+  exempt-staff: true               # модераторов и админов не проверять
+  learning: true                   # ИИ дообучается на решениях модераторов (веса: anticheat-model.yml)
+  max-ping: 400                    # при пинге выше улики почти не учитываются
+  discord-webhook: ""              # ссылка на вебхук Discord - письма о вызовах будут дублироваться туда
+  disabled-checks: []              # выключить проверки, например: [CLICKER, AIM_SENS, STEALER]
+  client-brands: [meteor, wurst, aristois, liquidbounce, rusherhack, thunderhack, nursultan, celestial, expensive, wexside, deadcode, akrien, bleachhack, inertia, impact, konas, phobos, boze]
+  client-channels: [meteor, wurst, liquidbounce, aristois, rusherhack, thunderhack, nursultan, bleachhack]
+
+# ================= МАГАЗИН (монеты) /market =================
+shop:
+  golden_apple: {item: "GOLDEN_APPLE:2", price: 150}
+  pearls: {item: "ENDER_PEARL:8", price: 300}
+  totem: {item: "TOTEM_OF_UNDYING:1", price: 3000}
+  xp: {item: "EXPERIENCE_BOTTLE:32", price: 250}
+  tnt: {item: "TNT:16", price: 600}
+  obsidian: {item: "OBSIDIAN:32", price: 400}
+  crystals: {item: "END_CRYSTAL:4", price: 1500}
+  rockets: {item: "FIREWORK_ROCKET:32", price: 300}
+  elytra: {item: "ELYTRA:1", price: 15000}
+  region_coal: {item: "region:coal", price: 500}
+  region_iron: {item: "region:iron", price: 2500}
+  region_gold: {item: "region:gold", price: 8000}
+
+# ================= СПЕЦ-ПРЕДМЕТЫ =================
+special:
+  golden_dome:                     # Золотой купол: неломаемая клетка 5x5 из стекла (внутри пусто 3x3x3), со стеклянным полом
+    seconds: 15                    # сколько держится
+    cooldown: 30
+    glass: YELLOW_STAINED_GLASS
+    inner-size: 3                  # пустое место внутри (3 -> клетка 5x5)
+    inner-height: 3
+  truth_snow:                      # Снег правды: подсвечивает невидимок рядом с местом попадания
+    radius: 6
+    glow-seconds: 15
+    slow-seconds: 10               # Замедление I раскрытым невидимкам и тому, в кого попал
+  temple_wall:                     # Стена храма: нерушимая стена перед игроком
+    width: 5
+    height: 5
+    thickness: 2
+    distance: 2                    # в скольких блоках перед игроком
+    seconds: 15
+    cooldown: 30
+  coral_net:                       # Коралловая сеть: враги в квадрате size x size от попадания не могут двигаться
+    size: 3
+    seconds: 3
+    cooldown: 3
+  sea_aura:                        # Аура моря: ПКМ - снимает все эффекты, взамен Сила I и Скорость I
+    buff-seconds: 30
+    cooldown: 30
+  rage_potion:                     # Зелье ярости (взрывное): урон + Сила IV и Замедление II
+    damage: 8                      # урон при прямом попадании (8 = 4 ❤, проходит сквозь броню)
+    seconds: 90
+  aqua_charge:                     # Заряд аквамарина: борозда-полумесяц, облицованная призмарином + засасывание игроков рядом
+    length: 6                      # длина дуги
+    width: 2                       # ширина в середине (к концам сужается)
+    depth: 4                       # глубина в середине (к концам мельче)
+    lantern-chance: 0.15           # морские фонари на дне
+    fatigue-level: 2               # враги в борозде: слепота + усталость этого уровня (хозяин - нет)
+    pull-radius: 1.0
+    cooldown: 3
+    restore-seconds: 30            # через сколько земля восстановится (0 - не восстанавливать)
+
+# ================= ДОНАТ-МАГАЗИН (Ari) /shop =================
+# Обычные (питьевые) зелья стакаются до N штук (1 - как в ванилле). Взрывные и туманные - всегда поштучно
+potion-stack: 16
+
+donshop:
+  # Спец-предметы и донатные зелья: price - за набор из amount шт.
+  special:
+    golden_dome: {price: 39, amount: 1}
+    truth_snow: {price: 19, amount: 4}
+    aqua_charge: {price: 29, amount: 2}
+    sea_aura: {price: 35, amount: 1}
+    temple_wall: {price: 39, amount: 1}
+    coral_net: {price: 29, amount: 2}
+  potions:
+    athena_kiss: {price: 25, amount: 1}
+    reaper_blood: {price: 35, amount: 1}
+    storm_potion: {price: 25, amount: 1}
+    fugu_potion: {price: 19, amount: 1}
+    rage_potion: {price: 35, amount: 1}
+  weapons:
+    kratos_blade: 299
+    leviathan_axe: 249
+    artemis_bow: 199
+    zeus_trident: 279
+    hades_scythe: 279
+    poseidon_mace: 299
+    apollo_crossbow: 199
+    ares_shield: 149
+  tools:
+    titan_pickaxe: 199
+    hephaestus_drill: 349
+  armor:
+    olympus_helmet: 129
+    olympus_chestplate: 179
+    olympus_leggings: 159
+    olympus_boots: 119
+    hermes_boots: 199
+  spheres:
+    sphere_fish: 49
+    sphere_jellyfish: 79
+    sphere_turtle: 119
+    sphere_dolphin: 159
+    sphere_shark: 219
+    sphere_kraken: 299
+    sphere_poseidon: 449
+  talismans:
+    talisman_fish: 19
+    talisman_jellyfish: 29
+    talisman_turtle: 39
+    talisman_dolphin: 59
+    talisman_shark: 79
+    talisman_kraken: 99
+    talisman_poseidon: 149
+  buffs:
+    speed: 99
+    haste: 99
+    night_vision: 49
+    fire_resistance: 79
+    strength: 249
+    regeneration: 299
+    water_breathing: 29
+    jump_boost: 59
+  spawners:
+    ZOMBIE: 149
+    SKELETON: 149
+    SPIDER: 129
+    CREEPER: 199
+    BLAZE: 299
+    MAGMA_CUBE: 199
+    ENDERMAN: 349
+    IRON_GOLEM: 599
+  enchants:
+    vampirism_1: 79
+    vampirism_2: 149
+    vampirism_3: 249
+    explosive_1: 99
+    explosive_2: 199
+    autosmelt_1: 69
+    telekinesis_1: 59
+  regions:
+    diamond: 99
+    emerald: 249
+    netherite: 499
+
+# ================= КИТЫ =================
+kits:
+  # предмет:кол-во[:чары]   custom:<id>[:кол-во]   potion|splash:<эффект>:<уровень>:<секунд>[:кол-во]
+  start: {rank: player, cooldown: 86400, items: [STONE_SWORD:1, STONE_PICKAXE:1, STONE_AXE:1, STONE_SHOVEL:1, BREAD:32, COOKED_BEEF:16, TORCH:32, OAK_LOG:32, IRON_INGOT:8]}
+  traveler: {rank: traveler, cooldown: 86400, items: [IRON_SWORD:1, IRON_PICKAXE:1, IRON_AXE:1, IRON_HELMET:1, IRON_CHESTPLATE:1, IRON_LEGGINGS:1, IRON_BOOTS:1, COOKED_BEEF:64, GOLDEN_APPLE:2, ENDER_PEARL:4, EXPERIENCE_BOTTLE:16, IRON_INGOT:16, TORCH:32]}
+  hunter: {rank: hunter, cooldown: 86400, items: ['BOW:1:power=3,unbreaking=2', ARROW:128, IRON_CHESTPLATE:1:protection=2, IRON_BOOTS:1:feather_falling=3, GOLDEN_APPLE:6, ENDER_PEARL:8, COOKED_BEEF:32, EXPERIENCE_BOTTLE:16]}
+  phantom: {rank: phantom, cooldown: 86400, items: [DIAMOND_SWORD:1, IRON_HELMET:1:protection=3, IRON_CHESTPLATE:1:protection=3, IRON_LEGGINGS:1:protection=3, IRON_BOOTS:1:protection=3, ENDER_PEARL:16, GOLDEN_APPLE:8, COOKED_BEEF:32, EXPERIENCE_BOTTLE:32, OBSIDIAN:16]}
+  lord: {rank: lord, cooldown: 86400, items: [DIAMOND_SWORD:1:sharpness=2, DIAMOND_PICKAXE:1:efficiency=3, DIAMOND_HELMET:1, DIAMOND_CHESTPLATE:1, DIAMOND_LEGGINGS:1, DIAMOND_BOOTS:1, GOLDEN_APPLE:10, ENDER_PEARL:16, COOKED_BEEF:64, EXPERIENCE_BOTTLE:32, DIAMOND:8, OBSIDIAN:32]}
+  emperor: {rank: emperor, cooldown: 86400, items: ['DIAMOND_SWORD:1:sharpness=4,unbreaking=3', DIAMOND_CHESTPLATE:1:protection=4, DIAMOND_LEGGINGS:1:protection=3, TOTEM_OF_UNDYING:2, GOLDEN_APPLE:16, ENDER_PEARL:32, EXPERIENCE_BOTTLE:64, COOKED_BEEF:64, DIAMOND:16, OBSIDIAN:64]}
+  # ТОП-кит: полный незерит Защита V
+  overlord: {rank: overlord, cooldown: 86400, items: ['NETHERITE_HELMET:1:protection=5,unbreaking=3,mending=1,respiration=3', 'NETHERITE_CHESTPLATE:1:protection=5,unbreaking=3,mending=1', 'NETHERITE_LEGGINGS:1:protection=5,unbreaking=3,mending=1,swift_sneak=3', 'NETHERITE_BOOTS:1:protection=5,unbreaking=3,mending=1,feather_falling=4,depth_strider=3', 'NETHERITE_SWORD:1:sharpness=6,unbreaking=3,mending=1,fire_aspect=2,looting=3', TOTEM_OF_UNDYING:3, ENCHANTED_GOLDEN_APPLE:1, GOLDEN_APPLE:32, ENDER_PEARL:32, END_CRYSTAL:16, EXPERIENCE_BOTTLE:64, DIAMOND:32, NETHERITE_INGOT:2, OBSIDIAN:64, custom:talisman_shark]}
+  # ---------- PvP-наборы ----------
+  pvp: {rank: player, cooldown: 21600, items: [IRON_SWORD:1:sharpness=1, IRON_HELMET:1:protection=1, IRON_CHESTPLATE:1:protection=1, IRON_LEGGINGS:1:protection=1, IRON_BOOTS:1:protection=1, SHIELD:1, GOLDEN_APPLE:4, COOKED_BEEF:32, ENDER_PEARL:2]}
+  pvp_archer: {rank: hunter, cooldown: 28800, items: ['BOW:1:power=4,punch=1,unbreaking=3', 'CROSSBOW:1:quick_charge=2,piercing=2', ARROW:192, SPECTRAL_ARROW:32, DIAMOND_HELMET:1:protection=2, IRON_CHESTPLATE:1:projectile_protection=4, IRON_LEGGINGS:1:protection=2, DIAMOND_BOOTS:1:feather_falling=4, potion:speed:2:120:2, GOLDEN_APPLE:8, ENDER_PEARL:8, COOKED_BEEF:32]}
+  pvp_warrior: {rank: lord, cooldown: 28800, items: ['DIAMOND_SWORD:1:sharpness=4,unbreaking=3', DIAMOND_AXE:1:sharpness=3, 'DIAMOND_HELMET:1:protection=3,unbreaking=3', 'DIAMOND_CHESTPLATE:1:protection=3,unbreaking=3', 'DIAMOND_LEGGINGS:1:protection=3,unbreaking=3', 'DIAMOND_BOOTS:1:protection=3,feather_falling=4', SHIELD:1:unbreaking=3, splash:strength:1:90:3, splash:instant_health:2:1:6, GOLDEN_APPLE:16, ENDER_PEARL:16, COOKED_BEEF:32]}
+  pvp_crystal: {rank: emperor, cooldown: 43200, items: ['NETHERITE_HELMET:1:protection=4,unbreaking=3', 'NETHERITE_CHESTPLATE:1:protection=4,unbreaking=3', 'NETHERITE_LEGGINGS:1:blast_protection=4,unbreaking=3', 'NETHERITE_BOOTS:1:protection=4,feather_falling=4', NETHERITE_SWORD:1:sharpness=5, END_CRYSTAL:64, OBSIDIAN:128, RESPAWN_ANCHOR:16, GLOWSTONE:64, TOTEM_OF_UNDYING:3, GOLDEN_APPLE:24, ENDER_PEARL:32, EXPERIENCE_BOTTLE:128]}
+  pvp_god: {rank: overlord, cooldown: 43200, items: ['NETHERITE_HELMET:1:protection=5,unbreaking=3,mending=1', 'NETHERITE_CHESTPLATE:1:protection=5,unbreaking=3,mending=1', 'NETHERITE_LEGGINGS:1:protection=5,unbreaking=3,mending=1', 'NETHERITE_BOOTS:1:protection=5,unbreaking=3,mending=1,feather_falling=4', 'NETHERITE_SWORD:1:sharpness=6,unbreaking=3,fire_aspect=2', 'MACE:1:density=4,wind_burst=1', splash:strength:2:60:3, splash:speed:2:120:3, splash:instant_health:2:1:8, potion:fire_resistance:1:480:2, TOTEM_OF_UNDYING:4, ENCHANTED_GOLDEN_APPLE:1, GOLDEN_APPLE:48, ENDER_PEARL:32, WIND_CHARGE:32, custom:talisman_jellyfish]}
+
+# ================= КЕЙСЫ (/cases, блоки на спавне) =================
+# награда;вес(шанс);редкость(common/rare/epic/legendary/mythic)
+# rank:<ранг> ari:<n> coins:<n> title:<id> buff:<id> spawner:<МОБ> custom:<id> region:<тип> key:<кейс>:<n> МАТЕРИАЛ:<кол-во>
+# Выдать ключи (автодонат): cases give <ник> <кейс> <кол-во>
+daily-key: ari               # +1 ключ Ari-кейса в /daily
+cases-duplicate: {common: 300, rare: 600, epic: 1200, legendary: 2500, mythic: 5000}   # монеты за повтор титула
+cases-world-animation: true   # открытие у блока кейса: предметы кружатся вокруг кейса (иначе - рулетка в меню)
+cases:
+  donate:
+    display: "<gradient:#ff00aa:#b000ff><bold>Донат-кейс</bold></gradient>"
+    block: OMINOUS_VAULT
+    location: "spawn;325;5;341"
+    animation: vortex          # анимация прокрута: vortex / amethyst / portal / snow
+    icon: OMINOUS_TRIAL_KEY
+    key-price-ari: 49
+    description: ["<gray>Только привилегии:", "<gray>от Traveler до <gradient:#ff0055:#aa00ff>Overlord"]
+    hologram: ["<gray>Только привилегии - до <gradient:#ff0055:#aa00ff>Overlord"]
+    rewards:
+    - "rank:traveler;35;common"
+    - "rank:hunter;25;rare"
+    - "rank:phantom;18;rare"
+    - "rank:lord;12;epic"
+    - "rank:emperor;7;legendary"
+    - "rank:overlord;3;mythic"
+  ari:
+    display: "<gradient:#00f0ff:#0080ff><bold>Ari-кейс</bold></gradient>"
+    block: VAULT
+    location: "spawn;332;5;339"
+    animation: amethyst
+    icon: TRIAL_KEY
+    key-price-ari: 5
+    key-price-coins: 5000
+    description: ["<gray>Донатная валюта Ari: до <light_purple>500 ✦", "<gray>Ключ за монеты или Ari"]
+    hologram: ["<gray>Выиграй до <light_purple>500 Ari ✦"]
+    rewards:
+    - "ari:1;38;common"
+    - "coins:3000;12;common"
+    - "ari:2;20;common"
+    - "ari:3;12;rare"
+    - "ari:5;8;rare"
+    - "ari:10;5;epic"
+    - "key:donate:1;2;epic"
+    - "ari:25;2;epic"
+    - "ari:50;0.8;legendary"
+    - "ari:100;0.18;legendary"
+    - "ari:500;0.02;mythic"
+  titles:
+    display: "<gradient:#ffd54f:#00b0ff><bold>Кейс титулов</bold></gradient>"
+    block: VAULT
+    location: "spawn;339;5;341"
+    animation: portal
+    icon: NAME_TAG
+    key-price-ari: 15
+    key-price-coins: 3000
+    description: ["<gray>12 эксклюзивных титулов,", "<gray>которые нельзя купить", "<gray>Самый редкий: <gradient:#ff0055:#00f0ff:#b000ff><bold>✦ AQUA GOD ✦"]
+    hologram: ["<gray>Эксклюзивные титулы в чате"]
+    rewards:
+    - "title:pirate;12;common"
+    - "title:sailor;11;common"
+    - "title:fisher;10;common"
+    - "title:wanderer;10;common"
+    - "title:shark;10;rare"
+    - "title:storm;9;rare"
+    - "title:corsair;9;rare"
+    - "title:kraken;8;epic"
+    - "title:leviathan;7;epic"
+    - "title:poseidon;6;legendary"
+    - "title:abyss;5.5;legendary"
+    - "title:aquagod;2.5;mythic"
+  # --- сезонные кейсы: active "ММ-дд..ММ-дд", без блока на спавне (открытие через /cases) ---
+  newyear:
+    display: "<gradient:#ff1744:#ffffff:#00e5ff><bold>Новогодний кейс</bold></gradient>"
+    block: CHEST
+    animation: snow
+    active: "12-15..01-15"
+    icon: SNOWBALL
+    key-price-ari: 19
+    description: ["<gray>Только на Новый год!", "<gray>Титулы, книги, бусты, Ari"]
+    rewards:
+    - "title:snowman;14;common"
+    - "coins:5000;14;common"
+    - "enchant:telekinesis:1;10;rare"
+    - "enchant:autosmelt:1;10;rare"
+    - "title:santa;8;epic"
+    - "ari:25;6;epic"
+    - "enchant:vampirism:2;5;epic"
+    - "boost:coins;4;legendary"
+    - "title:frost;3;legendary"
+    - "rank:lord;1;mythic"
+  halloween:
+    display: "<gradient:#ff6f00:#4a148c><bold>Кейс Хэллоуина</bold></gradient>"
+    block: CHEST
+    active: "10-15..11-10"
+    icon: JACK_O_LANTERN
+    key-price-ari: 19
+    description: ["<gray>Только на Хэллоуин!", "<gray>Титулы, книги, бусты, Ari"]
+    rewards:
+    - "title:pumpkin;14;common"
+    - "coins:5000;14;common"
+    - "enchant:explosive:1;10;rare"
+    - "enchant:autosmelt:1;10;rare"
+    - "title:ghost;8;epic"
+    - "ari:25;6;epic"
+    - "enchant:vampirism:3;4;epic"
+    - "boost:pass;4;legendary"
+    - "title:reaper13;3;legendary"
+    - "rank:emperor;1;mythic"
+seasonal-force: []   # id сезонных кейсов, включённых вне их дат
+
+# ================= ГОЛОГРАММЫ (мир spawn) =================
+# {top_kills} {top_balance} {top_playtime} {online} {max} {event} {site} {players}
+holograms:
+  welcome:
+    location: "spawn;333.5;8.0;349.5"
+    scale: 1.5
+    lines:
+    - "<gradient:#00f0ff:#0080ff:#b000ff><bold>✦ AquaAnarchy ✦</bold></gradient>"
+    - "<gray>Анархия 1.21.11 <dark_gray>|</dark_gray> онлайн: <aqua>{online}"
+    - "<white>Здесь можно всё. <red>Правил почти нет."
+  start:
+    location: "spawn;332.5;8.7;369.5"
+    scale: 1.0
+    lines:
+    - "<#00f0ff><bold>⚡ Как начать</bold>"
+    - "<white>1. <gray>Войди в <aqua>портал</aqua> впереди - случайный телепорт"
+    - "<white>2. <gray>Построй базу и поставь <yellow>приват</yellow> (/market)"
+    - "<white>3. <gray>Сохрани точку дома: <yellow>/sethome"
+    - "<white>4. <gray>Выполняй <aqua>квесты</aqua> и забирай <gold>/daily"
+    - " "
+    - "<gray>Главное меню: <yellow><bold>/menu"
+  portal:
+    location: "spawn;332.5;9.0;392.5"
+    scale: 2.2
+    lines:
+    - "<gradient:#b000ff:#00f0ff><bold>☠ ПОРТАЛ В МИР ☠</bold></gradient>"
+    - "<gray>Войди - и окажешься в случайном месте"
+  top_kills:
+    location: "spawn;320.5;6.0;349.5"
+    scale: 1.0
+    lines:
+    - "<gradient:#ff3355:#ff9900><bold>⚔ Топ убийц</bold></gradient>"
+    - " "
+    - "{top_kills}"
+  top_balance:
+    location: "spawn;345.5;6.0;349.5"
+    scale: 1.0
+    lines:
+    - "<gradient:#ffd700:#ff9900><bold>⛃ Топ богачей</bold></gradient>"
+    - " "
+    - "{top_balance}"
+  top_playtime:
+    location: "spawn;345.5;6.0;355.5"
+    scale: 1.0
+    lines:
+    - "<gradient:#00f0ff:#00ff99><bold>⌚ Топ по онлайну</bold></gradient>"
+    - " "
+    - "{top_playtime}"
+  donate:
+    location: "spawn;318.5;7.75;342.5"
+    scale: 0.9
+    lines:
+    - "<gradient:#ff00aa:#b000ff><bold>♛ Привилегии</bold></gradient>"
+    - "<gray>Traveler, Hunter, Phantom,"
+    - "<gray>Lord, Emperor, <gradient:#ff0055:#aa00ff>Overlord"
+    - "<yellow>/don <gray>| магазин: <light_purple>/shop"
+  events:
+    location: "spawn;347.5;6.4;342.5"
+    scale: 0.9
+    lines:
+    - "<gradient:#ff9900:#ff3355><bold>✹ Ивенты</bold></gradient>"
+    - "<gray>Аирдроп, метеорит, босс, PvP-турнир,"
+    - "<yellow>Стрела Зевса, <red>Подземелье дьявола"
+    - "<gray>Редкости: <white>обычный → <gold>божественный"
+    - "<gray>Сейчас: {event}"
+  top_clans:
+    location: "spawn;320.5;6.0;355.5"
+    scale: 1.0
+    lines:
+    - "<gradient:#00f0ff:#b000ff><bold>⚑ Топ кланов</bold></gradient>"
+    - " "
+    - "{top_clans}"
+  cases_title:
+    location: "spawn;332.5;8.2;341.0"
+    scale: 1.3
+    lines:
+    - "<gradient:#00f0ff:#b000ff><bold>✦ КЕЙСЫ ✦</bold></gradient>"
+
+# ================= АКВАРИУМ (оформление спавна) =================
+# Левитирующие свечи (BlockDisplay + огонёк) и тропические рыбки в аквариумах. Координаты: [x, y, z]; tanks: [x, низ воды, z, радиус, верх воды]
+aquarium:
+  enabled: true
+  world: spawn
+  candle-block: "minecraft:white_candle[lit=true,candles=1]"
+  fish-per-tank: 6
+  candles: [[312.5, 9.1, 348.5], [312.5, 9.1, 352.5], [330.5, 9.1, 329.5], [334.5, 9.1, 329.5], [330.5, 9.1, 371.5], [334.5, 9.1, 371.5], [356.5, 7.1, 346.5], [356.5, 7.1, 354.5], [339.5, 11.2, 350.5], [338.7, 11.7, 353.5], [336.5, 11.2, 355.7], [333.5, 10.7, 356.5], [330.5, 11.2, 355.7], [328.3, 11.7, 353.5], [327.5, 11.2, 350.5], [328.3, 10.7, 347.5], [330.5, 11.2, 345.3], [333.5, 11.7, 344.5], [336.5, 11.2, 345.3], [338.7, 10.7, 347.5], [336.13, 12.6, 351.94], [333.57, 12.6, 353.5], [330.94, 12.6, 352.06], [330.87, 12.6, 349.06], [333.43, 12.6, 347.5], [336.06, 12.6, 348.94], [359.5, 5.1, 347.5], [359.5, 5.1, 353.5], [343.5, 7.1, 309.5], [343.5, 7.1, 313.5], [330.5, 7.1, 391.5], [334.5, 7.1, 391.5], [330.5, 7.1, 397.5], [334.5, 7.1, 397.5], [329.5, 15.1, 300.5], [335.5, 15.1, 300.5], [305.5, 20.1, 320.5]]
+  tanks: [[303.9, 6, 329.7, 3.8, 14], [300.7, 6, 373.4, 3.8, 14], [361.6, 6, 371.6, 3.8, 14]]
+
+# ================= NPC НА СПАВНЕ =================
+# Клик по NPC = команда от имени игрока. skin - ник с лицензии (нужен доступ к Mojang). /aqua npc - пересоздать
+npcs:
+  clans: {location: "spawn;324.5;6;363.5;180;0", skin: "Dream", command: "clan", lines: ["<aqua><bold>Кланы</bold>", "<gray>Создать / вступить"]}
+  pass: {location: "spawn;332.5;6;365.5;180;0", skin: "jeb_", command: "pass", lines: ["<gradient:#ffd700:#ff8c00><bold>Боевой пропуск</bold></gradient>", "<gray>50 уровней наград"]}
+  auction: {location: "spawn;340.5;6;363.5;180;0", skin: "Technoblade", command: "ah", lines: ["<gold><bold>Аукцион</bold>", "<gray>Торговля с игроками"]}
+  shop: {location: "spawn;318.5;5;342.5;-135;0", skin: "Steve", command: "shop", lines: ["<light_purple><bold>Донат-магазин</bold>", "<gray>Предметы, книги, бусты"]}
+  poseidon:
+    location: "spawn;342.5;6;303.5;90;0"
+    skin: "Poseidon"
+    command: "event poseidon"
+    lines: ["<gradient:#5ef2ff:#1e7bff><bold>Посейдон</bold></gradient>", "<gray>Обмен <aqua>Сердец моря</aqua> на лут"]
+    equipment: {main-hand: TRIDENT, off-hand: NAUTILUS_SHELL, helmet: GOLDEN_HELMET, chestplate: LEATHER_CHESTPLATE, leggings: LEATHER_LEGGINGS, boots: DIAMOND_BOOTS, color: "#1E7BFF", glint: true}
+
+# ================= ОФОРМЛЕНИЕ =================
+visual:
+  title: "<gradient:#00f0ff:#0080ff:#b000ff><bold>AquaAnarchy</bold></gradient>"
+  motd:
+  - "<gradient:#00f0ff:#0080ff:#b000ff><bold>         ✦ AquaAnarchy ✦</bold></gradient> <gray>1.21.11"
+  - "<white>   Анархия <dark_gray>|</dark_gray> <aqua>кейсы</aqua> <dark_gray>|</dark_gray> <light_purple>донат</light_purple> <dark_gray>|</dark_gray> <gold>ивенты</gold> <dark_gray>|</dark_gray> <green>пиратка"
+  tab-header:
+  - ""
+  - "<gradient:#00f0ff:#0080ff:#b000ff><bold>✦ AquaAnarchy ✦</bold></gradient>"
+  - "<gray>Анархия без правил <dark_gray>|</dark_gray> 1.21.11"
+  - ""
+  tab-footer:
+  - ""
+  - "<gray>Онлайн: <aqua>{online}</aqua><dark_gray>/</dark_gray><gray>{max}  <dark_gray>|</dark_gray>  <gray>Пинг: <aqua>{ping} мс</aqua>  <dark_gray>|</dark_gray>  <gray>TPS: {tps}"
+  - "<gray>Меню: <yellow>/menu</yellow>  <dark_gray>|</dark_gray>  <gray>Кейсы: <aqua>/cases</aqua>  <dark_gray>|</dark_gray>  <gray>Донат: <light_purple>{site}"
+  - ""
+  bossbar:
+  - "<gradient:#00f0ff:#0080ff><bold>✦ Добро пожаловать на AquaAnarchy ✦</bold></gradient>"
+  - "<gray>Портал в мир - <aqua>к югу от центра</aqua> <dark_gray>|</dark_gray> <gray>онлайн: <aqua>{online}"
+  - "<gray>Кейсы - <light_purple>за центральной площадью</light_purple> <dark_gray>|</dark_gray> <yellow>/cases"
+  - "<gray>Главное меню: <yellow>/menu</yellow> <dark_gray>|</dark_gray> <gray>привилегии: <light_purple>/don"
+
+help:
+- "<gradient:#00f0ff:#0080ff><bold>✦ AquaAnarchy - команды</bold></gradient>"
+- "<yellow>/menu <gray>- главное меню (всё в одном месте)"
+- "<yellow>/rtp <gray>[far|player] - случайный телепорт"
+- "<yellow>/spawn <gray>- на спавн  <yellow>/home /sethome <gray>- дома"
+- "<yellow>/tpa <ник> <gray>- запрос телепорта  <yellow>/tpaccept"
+- "<yellow>/cases <gray>- кейсы  <yellow>/don <gray>- привилегии  <yellow>/shop <gray>- донат-магазин"
+- "<yellow>/market <gray>- магазин за монеты  <yellow>/rg <gray>- приваты  <yellow>/daily <gray>- награда"
+- "<yellow>/quests /titles /profile /buffs /kit /pay"
+- "<yellow>/clan <gray>- кланы  <yellow>/cc <gray>- клан-чат  <yellow>/ah <gray>- аукцион"
+- "<yellow>/seller-buyer <gray>- скупщик  <yellow>/mine <gray>- автошахта  <yellow>/clan level|chest|zones <gray>- уровень, сундук, территории"
+- "<yellow>/pass <gray>- боевой пропуск  <yellow>/boost <gray>- бусты x2"
+- "<yellow>/pwarps <gray>- варпы игроков  <yellow>/pwarp set <имя> <gray>- свой варп"
+- "<yellow>/event delay <gray>- ивенты: что идёт, где и когда следующий"
+- "<yellow>/code <код> <gray>- промокод  <yellow>/report <ник> <причина> <gray>- жалоба"
+- "<yellow>/spec <ник> <gray>- позвать модератора, если видишь читера"
+
+# ================= СФЕРЫ: скины голов =================
+# Хеш textures.minecraft.net, полная ссылка или base64 "value" (как на minecraft-heads.com)
+custom-items:
+  sphere-textures:
+    sphere_fish: "829ed727dfdd4a63cd1ceee416a7b9c356df9841328beda55a997cf35c4f0456"
+    sphere_jellyfish: "b00ea9b993193e336a7ec804f60c25a930990a0290646956bc590d216bfa8eb7"
+    sphere_turtle: "bb094715651233e1a41b0947299d57606cda096334e811830a1d92137d2f4e46"
+    sphere_dolphin: "6029882f93d31bfcb1c26caac1d01be77d393c1e13a042b11cea60cc60d05e1b"
+    sphere_shark: "150ddd7aa48de9a82909387b7a2e4b993e1e04351913326aea49ed87d7a2059e"
+    sphere_kraken: "aeda9068d66a437c461ebf3676abe073907610a622a8f8d7c16c7e0cecfd2cd2"
+    sphere_poseidon: "4c7d28bad752a22f0907d5b4dfecc47e2d4d851e4d9b98cda1134ab9f9f4528e"
+
+# ================= АВТОШАХТА (спавн) =================
+# Куб руды в мире спавна, полностью обновляется каждые reset-minutes. Слои сверху вниз - чем глубже, тем ценнее.
+# Ломать можно только внутри шахты, ставить блоки нельзя. Перед первым заполнением исходные блоки сохраняются
+# в plugins/AnarchyCore/mine-original.yml. Админ: /mine reset | build | remove (вернуть исходные блоки) | reload
+mine:
+  enabled: true
+  world: spawn
+  pos1: 292 5 347 # угол шахты (x y z)
+  pos2: 299 -4 355 # противоположный угол
+  reset-minutes: 7
+  warn-seconds: [60, 10] # предупредить игроков рядом за N секунд до обновления
+  hologram: 296.0 8.6 351.5 # голограмма с таймером (x y z); пусто - без неё
+  layers: # сверху вниз. depth - сколько слоёв занимает уровень; blocks - "БЛОК вес" (больше вес - чаще)
+  - name: <white>Обычный
+    depth: 3
+    blocks: [STONE 45, COAL_ORE 30, COPPER_ORE 15, IRON_ORE 10]
+  - name: <green>Необычный
+    depth: 3
+    blocks: [DEEPSLATE 40, DEEPSLATE_IRON_ORE 25, DEEPSLATE_COPPER_ORE 10, DEEPSLATE_REDSTONE_ORE 12, DEEPSLATE_LAPIS_ORE 10, DEEPSLATE_GOLD_ORE 3]
+  - name: <aqua>Редкий
+    depth: 2
+    blocks: [DEEPSLATE 42, DEEPSLATE_IRON_ORE 15, DEEPSLATE_GOLD_ORE 25, DEEPSLATE_REDSTONE_ORE 7, DEEPSLATE_LAPIS_ORE 8, DEEPSLATE_DIAMOND_ORE 3]
+  - name: <light_purple>Эпический
+    depth: 1
+    blocks: [DEEPSLATE 48, DEEPSLATE_GOLD_ORE 25, DEEPSLATE_REDSTONE_ORE 10, DEEPSLATE_DIAMOND_ORE 8, DEEPSLATE_EMERALD_ORE 9]
+  - name: <gold>Легендарный
+    depth: 1
+    blocks: [DEEPSLATE 47, DEEPSLATE_GOLD_ORE 20, DEEPSLATE_DIAMOND_ORE 12, DEEPSLATE_EMERALD_ORE 13, ANCIENT_DEBRIS 8]
+
+# ================= СКУПЩИК (/seller-buyer, /buyer, /sell) =================
+# Сдавай ресурсы серверу за монеты. У каждого предмета свой лимит сдачи на игрока,
+# все лимиты сбрасываются каждые reset-hours часов (время до сброса - в меню скупщика).
+# ТОП-5 - самые ценные предметы: цена в 2-3 раза выше обычной, но сдать их можно меньше.
+# Строка: "МАТЕРИАЛ цена лимит". В top: "МАТЕРИАЛ обычная_цена множитель лимит".
+# Скупаются только «чистые» предметы - без имени, описания, чар и поломки.
+buyer:
+  reset-hours: 5
+  top-title: <gradient:#ffd700:#ff8c00><bold>★ ТОП-5 скупщика</bold></gradient>
+  top:
+  - ENCHANTED_GOLDEN_APPLE 600 3 2
+  - NETHERITE_INGOT 400 2.5 4
+  - NETHER_STAR 500 2 1
+  - TOTEM_OF_UNDYING 150 2 4
+  - ANCIENT_DEBRIS 85 2.5 8
+  categories:
+    ores:
+      name: <aqua><bold>Руды и минералы
+      icon: DIAMOND
+      items:
+      - DIAMOND 25 64
+      - EMERALD 12 64
+      - NETHERITE_SCRAP 90 8
+      - GOLD_INGOT 5 192
+      - RAW_GOLD 4 192
+      - IRON_INGOT 4 256
+      - RAW_IRON 3 256
+      - COPPER_INGOT 0.5 512
+      - RAW_COPPER 0.4 512
+      - COAL 1 512
+      - REDSTONE 0.5 512
+      - LAPIS_LAZULI 1 384
+      - QUARTZ 1 384
+      - AMETHYST_SHARD 0.5 256
+    farm:
+      name: <green><bold>Фермерство
+      icon: WHEAT
+      items:
+      - WHEAT 0.2 1024
+      - CARROT 0.1 1024
+      - POTATO 0.1 1024
+      - BEETROOT 0.15 1024
+      - SUGAR_CANE 0.15 1024
+      - PUMPKIN 0.3 512
+      - MELON_SLICE 0.05 2048
+      - CACTUS 0.1 1024
+      - BAMBOO 0.05 1024
+      - COCOA_BEANS 0.2 512
+      - NETHER_WART 0.2 1024
+      - SWEET_BERRIES 0.1 512
+      - KELP 0.05 1024
+      - APPLE 0.5 256
+      - EGG 0.1 256
+    mobs:
+      name: <red><bold>Дроп с мобов
+      icon: BONE
+      items:
+      - ROTTEN_FLESH 0.2 1024
+      - BONE 0.3 1024
+      - STRING 0.4 1024
+      - SPIDER_EYE 0.4 512
+      - GUNPOWDER 1 512
+      - SLIME_BALL 1 256
+      - ENDER_PEARL 6 64
+      - BLAZE_ROD 4 128
+      - GHAST_TEAR 8 32
+      - LEATHER 1 256
+      - FEATHER 0.2 512
+      - PHANTOM_MEMBRANE 3 64
+      - MAGMA_CREAM 1.5 128
+      - SHULKER_SHELL 30 16
+      - INK_SAC 0.3 256
+      - PRISMARINE_SHARD 0.5 256
+    blocks:
+      name: <gold><bold>Блоки и дерево
+      icon: OAK_LOG
+      items:
+      - OAK_LOG 0.3 512
+      - SPRUCE_LOG 0.3 512
+      - BIRCH_LOG 0.3 512
+      - JUNGLE_LOG 0.3 512
+      - ACACIA_LOG 0.3 512
+      - DARK_OAK_LOG 0.3 512
+      - MANGROVE_LOG 0.3 512
+      - CHERRY_LOG 0.3 512
+      - COBBLESTONE 0.02 2048
+      - COBBLED_DEEPSLATE 0.03 2048
+      - SAND 0.05 1024
+      - GRAVEL 0.05 1024
+      - OBSIDIAN 2 128
+      - GLOWSTONE_DUST 0.5 256
+      - CLAY_BALL 0.2 256
+      - END_STONE 0.1 512
+    valuable:
+      name: <light_purple><bold>Ценное
+      icon: GOLDEN_APPLE
+      items:
+      - GOLDEN_APPLE 10 32
+      - HEART_OF_THE_SEA 100 2
+      - WITHER_SKELETON_SKULL 60 4
+      - ECHO_SHARD 15 16
+      - NAUTILUS_SHELL 15 8
+      - DRAGON_BREATH 5 32
+      - ELYTRA 300 1
+      - TRIDENT 120 1

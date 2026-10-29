@@ -1,0 +1,119 @@
+name: AnarchyCore
+version: 3.0.0
+main: ru.anarchy.core.AnarchyCore
+api-version: '1.21'
+author: Anarchy
+description: Ядро AquaAnarchy - авторизация, донат, приваты, квесты, ивенты, ИИ-античит
+softdepend: [GrimAC]
+commands:
+  register: {aliases: [reg]}
+  login: {aliases: [l, log]}
+  changepassword: {aliases: [changepass, cp]}
+  menu: {aliases: [m, gui], description: Меню сервера}
+  donate: {aliases: [donat, ranks, privileges], description: Привилегии}
+  don: {description: Привилегии}
+  shop: {aliases: [donshop, dshop], description: Донат-магазин за Ari}
+  market: {aliases: [cshop, coinshop], description: Магазин за монеты}
+  profile: {aliases: [prof, p], description: Профиль игрока}
+  quests: {aliases: [quest, q], description: Ежедневные квесты}
+  titles: {aliases: [title], description: Титулы}
+  buffs: {aliases: [buff], description: Бафы}
+  daily: {aliases: [reward, bonus], description: Ежедневная награда}
+  ari: {description: Донатная валюта}
+  rg: {aliases: [region, privat, priv], description: Приваты}
+  spawn: {aliases: [hub, lobby, hab], description: Телепорт на спавн}
+  cases: {aliases: [case, keys, kejs, crates], description: Кейсы}
+  tpa: {}
+  tpahere: {}
+  tpaccept: {aliases: [tpyes]}
+  tpdeny: {aliases: [tpno]}
+  home: {aliases: [h]}
+  sethome: {}
+  delhome: {}
+  homes: {}
+  rtp: {aliases: [randomtp, wild], description: "Случайный телепорт: /rtp, /rtp far, /rtp player"}
+  kit: {aliases: [kits]}
+  balance: {aliases: [bal, money]}
+  pay: {}
+  baltop: {aliases: [moneytop]}
+  stats: {aliases: [stat]}
+  killtop: {aliases: [leaders, kills]}
+  suicide: {aliases: [kill]}
+  rules: {aliases: [pravila]}
+  hat: {}
+  trash: {aliases: [disposal]}
+  ext: {aliases: [extinguish]}
+  craft: {aliases: [workbench, wb]}
+  hunt: {}
+  stonecutter: {}
+  loom: {}
+  nv: {aliases: [nightvision]}
+  ghost: {}
+  ec: {aliases: [enderchest]}
+  anvil: {}
+  grindstone: {}
+  feed: {}
+  repair: {aliases: [fix]}
+  back: {}
+  top: {}
+  smithing: {}
+  cartography: {}
+  heal: {}
+  near: {}
+  fly: {}
+  bc: {aliases: [broadcast]}
+  invsee: {}
+  ecsee: {}
+  color: {}
+  ptime: {}
+  pweather: {}
+  clan: {aliases: [clans, c, klan], description: Кланы}
+  cc: {aliases: [clanchat], description: Клан-чат}
+  ah: {aliases: [auction, auc, aukcion], description: Аукцион}
+  boost: {aliases: [boosts, bust], description: Бусты сервера}
+  pass: {aliases: [battlepass, bp, propusk], description: Боевой пропуск}
+  bpshop: {aliases: [bpmagaz, aquashop, bpm], description: "Магазин БП: аквакоины на сферы, талисманы и вечные бафы"}
+  monuments: {aliases: [monument, mon, dangi, danzhi], description: "Монументы (мини-данжи) на карте RTP"}
+  crafts: {aliases: [recipes, krafty, speccrafts], description: "Особые крафты спец-предметов"}
+  pwarp: {aliases: [pw, playerwarp], description: Варпы игроков}
+  pwarps: {aliases: [pws], description: Список варпов игроков}
+  warp: {aliases: [warps], description: "Варпы сервера: перенос к NPC на спавне"}
+  event: {aliases: [events, ivent, iventy], description: "Ивенты: /event delay, join, track"}
+  ban: {description: Бан}
+  tempban: {description: Временный бан}
+  banip: {aliases: [ipban], description: Бан по IP}
+  unban: {aliases: [pardon], description: Разбан}
+  mute: {description: Мут}
+  unmute: {description: Снять мут}
+  kick: {description: Кик}
+  warn: {description: Предупреждение}
+  history: {aliases: [hist, punishments], description: История наказаний}
+  check: {aliases: [prov, proverka], description: Проверка на читы}
+  freeze: {description: Заморозка}
+  vanish: {aliases: [v], description: Невидимость}
+  glog: {aliases: [co, inspect], description: Журнал блоков}
+  rollback: {aliases: [rb], description: Откат гриферства}
+  admin: {aliases: [panel, apanel], description: Админ-панель}
+  aqua: {permission: anarchy.admin, description: Админ-команды AquaAnarchy}
+  rank: {permission: anarchy.admin}
+  eco: {permission: anarchy.admin}
+  core: {permission: anarchy.admin}
+  code: {aliases: [promo, promocode], description: Активировать промокод или код автора}
+  codes: {description: Управление промокодами (админ)}
+  report: {aliases: [complain, zhaloba], description: Пожаловаться на игрока}
+  reports: {description: Жалобы игроков (модераторы)}
+  spec: {aliases: [spectate, sledit], description: Позвать модератора проследить / режим наблюдателя}
+  alts: {aliases: [dupeip, accounts, twinks], description: Все аккаунты игрока по IP}
+  xray: {description: Статистика копания (детектор X-Ray)}
+  mod: {description: Связь с модератором на проверке}
+  sell: {aliases: [skupka], description: Продать ресурсы серверу}
+  seller-buyer: {aliases: [buyer, seller, skupshik, skupchik], description: "Скупщик: ресурсы за монеты, лимиты на 5 часов, ТОП-5 x2-3"}
+  mine: {aliases: [automine, shaft, shakhta], description: "Автошахта на спавне"}
+  pvp: {aliases: [arena, pvparena, pvpwarp], description: "PvP-арена: лут-шалкеры, яма в Ад и Элитный шалкер"}
+  ac: {aliases: [anticheat, aiac, guard], description: "ИИ-античит AquaGuard: вызовы на проверку, досье, модель"}
+permissions:
+  anarchy.admin:
+    default: op
+  anarchy.ac.bypass:
+    description: ИИ-античит не собирает улики на игрока
+    default: false

@@ -1,0 +1,19 @@
+AnarchyCore 3.0.0 (AquaAnarchy) - исходный код плагина. Коммит a9a4cde, config-version 23.
+
+Состав:
+  src/            - Java-код (пакет ru.anarchy.core)
+  res/            - plugin.yml, config.yml (настройки по умолчанию), defaults-v*.yml (старые стандарты - по ним плагин
+                    сам обновляет config.yml при обновлении), dungeon.yml / dungeon.bin (схема Подземелья дьявола)
+  build.sh        - исходный скрипт сборки (из загруженного архива)
+  AnarchyCore.jar - готовая сборка (та же, что сейчас стоит на сервере)
+  CHANGELOG-*.txt - что менялось
+
+Сборка вручную (JDK 21):
+  1. Нужны библиотеки Paper 1.21.11: папки libraries/ и versions/ появляются в папке сервера после первого запуска.
+  2. Нужен grimac.jar (API GrimAC для моста античита) - лежит в plugins/ сервера.
+  3. Компиляция:
+       CP="$(find СЕРВЕР/libraries СЕРВЕР/versions -name '*.jar' | tr '\n' ':')СЕРВЕР/plugins/grimac.jar"
+       javac -proc:none --release 21 -encoding UTF-8 -nowarn -cp "$CP" -d out $(find src -name '*.java')
+       cp -r res/. out/
+       cd out && jar --create --file ../AnarchyCore.jar .
+  4. Положить AnarchyCore.jar в plugins/ и перезапустить сервер.
